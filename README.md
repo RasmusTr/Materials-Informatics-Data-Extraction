@@ -8,7 +8,7 @@ The notebook demonstrates how to programmatically access, query, and process str
 
 ---
 
-## 🎯 Purpose
+##  Purpose
 
 The main objectives of this project are:
 
@@ -19,7 +19,7 @@ The main objectives of this project are:
 
 ---
 
-## 🧰 Technologies Used
+##  Technologies Used
 
 * Python
 * Jupyter Notebook
@@ -31,7 +31,7 @@ The main objectives of this project are:
 
 ---
 
-## 🌐 Data Sources
+##  Data Sources
 
 The following materials databases are accessed:
 
@@ -44,7 +44,7 @@ The following materials databases are accessed:
 
 ---
 
-## ⚙️ Functionality
+##  Functionality
 
 The notebook includes functionality to:
 
@@ -56,7 +56,7 @@ The notebook includes functionality to:
 
 ---
 
-## 🧪 Example Use Cases
+##  Example Use Cases
 
 * Filtering materials by properties (e.g., band gap, density)
 * Collecting datasets for machine learning models
@@ -65,7 +65,7 @@ The notebook includes functionality to:
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone the repository
 
@@ -88,7 +88,7 @@ jupyter notebook
 
 ---
 
-## ⚠️ Notes
+##  Notes
 
 * Some databases require API keys (e.g., Materials Project)
 * Web scraping (e.g., MatWeb) may depend on website structure and can break if the site changes
@@ -96,10 +96,8 @@ jupyter notebook
 
 ---
 
-## 📌 Future Improvements
+##  Future Improvements
 
-* Add unified schema for all databases
-* Improve error handling and logging
 * Integrate additional materials databases
 * Build automated pipelines for continuous data updates
 
@@ -108,4 +106,4 @@ jupyter notebook
 ## 👨‍🔬 Author
 
 Rasmus Trommer
-M.Sc. Materials Science Student
+B.Sc. Materials Science Student
