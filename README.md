@@ -6,6 +6,8 @@ This project contains a Jupyter Notebook-based workflow designed to extract mate
 
 The notebook demonstrates how to programmatically access, query, and process structured and semi-structured materials data from various sources.
 
+In the code ... Example request are given on the basis for Refractory Metals (Mo, W, Nb, Cr, Ta, ...) 
+
 ---
 
 ##  Purpose
@@ -15,7 +17,7 @@ The main objectives of this project are:
 * Automate the extraction of materials data
 * Access multiple databases through APIs or web scraping
 * Standardize heterogeneous data formats
-* Prepare datasets for further analysis (e.g., machine learning, screening)
+* Prepare datasets for further analysis (machine learning) 
 
 ---
 
@@ -98,7 +100,7 @@ jupyter notebook
 ## Explanation of the Code: 
 ### 1. AFLOW API Refractory Materials Extractor
 
-This component automates data mining from the **AFLOW Distributed Materials Database** using the AFLUX search API. It targets specific refractory transition metals to compile an extensive raw dataset of elastic, structural, electronic, and thermodynamic properties.
+This component automates data mining from the AFLOW Distributed Materials Database using the AFLUX search API. It targets specific refractory transition metals to compile an extensive raw dataset of elastic, structural, electronic, and thermodynamic properties.
 
 ### Key Capabilities
 
@@ -112,11 +114,10 @@ This component automates data mining from the **AFLOW Distributed Materials Data
 The script communicates directly with the AFLOW server over standard HTTP via the following workflow:
 1. **Query Construction:** Builds a custom AFLUX query string matching structural properties with database keywords.
 2. **REST Request Execution:** Submits requests using Python's native `urllib.request` layer, dynamically managing structural formats and token indexing (`$paging()`, `format(json)`).
-3. **Robust Error Mitigation:** Employs explicit `JSONDecodeError` blocks to handle malformed or empty server packages gracefully without crashing the loop pipeline.
 
 ### 2. Materials Project API Refractory Materials Extractor
 
-This component automates data mining from the **Materials Project (MP) Database** using the official `mp-api` client. It extracts thermodynamic stability markers, electronic features, and detailed anisotropic elastic properties for target refractory alloys and elements.
+This component automates data mining from the Materials Project (MP) Database using the official `mp-api` client. It extracts thermodynamic stability markers, electronic features, and detailed anisotropic elastic properties for target refractory alloys and elements.
 
 ### Key Capabilities
 
@@ -125,16 +126,9 @@ This component automates data mining from the **Materials Project (MP) Database*
 * **Detailed Mechanical Property Mapping:** Extracts Voigt, Reuss, and Voigt-Reuss-Hill (VRH) bounds for both bulk and shear moduli, along with isotropic Poisson ratios and universal elastic anisotropy indices.
 * **Automated Data Consolidation:** Merges complex, nested crystal structural data (such as fractional lattice vectors and spacegroup symmetry metadata) into a flat, tabular format before exporting directly to a CSV file (`Data_Materials_Project/Mat_Project_Refractory_Raw.csv`).
 
-### How it Connects to Materials Project v2
-
-The pipeline utilizes the modern Materials Project API infrastructure via the following workflow:
-1. **Authenticated Session Handling:** Leverages the `MPRester` context manager to safely open and close network communication ports using a personal API token.
-2. **Relational Lookup Optimization:** Maps the raw API document classes into temporary in-memory lookup dictionaries (`elastic_dict`), enabling high-performance, $O(1)$ cross-endpoint merging without redundant database calls.
-3. **Robust Sanitization:** Employs programmatic string sanitization via regular expressions to neutralize operating-system-specific illegal characters in output file paths.
-
 ### 3. OPTIMADE API Refractory Materials Extractor
 
-This component interfaces with the **Open Materials Database** utilizing the standardized **OPTIMADE (Open Databases Integration for Materials Design)** REST API specification. It queries structural records containing specific refractory metals and translates raw vector matrices into canonical crystallographic lattice parameters.
+This component interfaces with the Open Materials Database utilizing the standardized OPTIMADE (Open Databases Integration for Materials Design) REST API specification. It queries structural records containing specific refractory metals and translates raw vector matrices into canonical crystallographic lattice parameters.
 
 ### Key Capabilities
 
@@ -152,7 +146,7 @@ The execution pipeline standardizes query data transmission through the followin
 
 ### 4. JARVIS-DFT OPTIMADE Data Harvester
 
-This component interfaces with the **NIST JARVIS-DFT database** using the standardized **OPTIMADE** REST API specification. It programmatically crawls material structures containing advanced refractory and transition elements, automatically handles API pagination, and extracts both structural geometries and high-fidelity DFT-computed elastic and electronic properties.
+This component interfaces with the NIST JARVIS-DFT database using the standardized OPTIMADE REST API specification. It programmatically crawls material structures containing advanced refractory and transition elements, automatically handles API pagination, and extracts both structural geometries and high-fidelity DFT-computed elastic and electronic properties.
 
 ### Key Capabilities
 
@@ -170,7 +164,7 @@ The execution pipeline standardizes query data transmission through the followin
 
 ### 5. NOMAD Repository Advanced Material Data Aggregator
 
-This component interfaces with the **NOMAD Laboratory** infrastructure utilizing the server-side **NOMAD REST API (v1)** specification. It executes structural and thermodynamic queries to isolate low-bandgap bulk metallic systems containing target transition metals, traversing deep hierarchical archives via cursor-based pagination and extracting multi-property data frames.
+This component interfaces with the NOMAD Laboratory infrastructure utilizing the server-side NOMAD REST API (v1) specification. It executes structural and thermodynamic queries to isolate low-bandgap bulk metallic systems containing target transition metals, traversing deep hierarchical archives via cursor-based pagination and extracting multi-property data frames.
 
 ### Key Capabilities
 
@@ -179,19 +173,10 @@ This component interfaces with the **NOMAD Laboratory** infrastructure utilizing
 * **Hierarchical Metadata Extraction:** Navigates multi-tiered JSON response payload topologies to unify localized material properties (symmetry spacegroups, crystal networks, and volumetric metrics) with underlying mechanical data structures.
 * **Thermodynamic & Phonon Property Retrieval:** Targets specialized computational properties embedded across advanced calculation workflows, parsing data points for thermodynamic phase stability (`is_stable`), convex hull energy limits (`energy_hulll`), and Debye model temperature/thermal performance vectors.
 
-### How it Connects to NOMAD Lab
-
-The execution pipeline standardizes query data transmission through the following workflow:
-1. **Initial Structural Identification:** Issues explicit filtering parameter constraints via a POST routine to the `/entries/query` endpoint, isolating valid dataset candidates and indexing their global identification hashes.
-2. **Granular Archive Inspection:** Loops through the compiled master array of IDs to ping the individual `/entries/{entry_id}/archive/query` route, utilizing specific dynamic field wildcards (`"*"`) to safely strip away unrelated calculations.
-3. **Fault-Tolerant Tabular Persistence:** Populates a central Pandas DataFrame tracking extensive atomic, thermal, and crystalline variables, maintaining continuous safety savepoints by flushing records out to disk (`results_all.csv`) in sequential increments.
-
 ### 6. Mat-Web Data Extraction
 
 The source code and repository for accessing real-world material data can be found here:
 [Mat-Web-Data-Extraction on GitHub](https://github.com/RasmusTr/Mat-Web-Data-Extraction-)
-
-
 
 ## 👨‍🔬 Author
 
